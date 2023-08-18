@@ -1,5 +1,6 @@
 import controller
 
+# Меню запуска
 
 if __name__ == '__main__':
-    controller.start()
+    controller.start()  # вызов функции controller

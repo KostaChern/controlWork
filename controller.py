@@ -1,5 +1,7 @@
 from typing import Dict
 
+# тут находится управление программами
+
 import text
 import view
 import model
@@ -24,7 +26,7 @@ def start():
                 model.add_note(note)
                 view.print_message(text.new_note_successful(note))
             case 5:
-                key_word = view.input_search(text.empty_search())
+                key_word = view.input_search(text.input_search)
                 result = model.search_note(key_word)
                 view.print_note(result, text.empty_search(key_word))
             case 6:
@@ -44,7 +46,13 @@ def start():
 
 
             case 7:
-                pass
+                key_word = view.input_search(text.delete_request)
+                result = model.search_note(key_word)
+                view.print_note(result, text.empty_search(key_word))
+                key_del = view.input_search(text.delete_note)
+                result = model.delete_note(key_del)
+                view.print_note(result, text.delete_successful(key_word))
+
             case 8:
                 break
 
