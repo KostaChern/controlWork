@@ -20,9 +20,10 @@ def save_nb():
     global note_book
     data = []
     for note in note_book:
-        data.append(':'.join([value for value in note.values() ]))
+        data.append(':'.join([value for value in note.values()]))
     data = '\n'.join(data)
     with open(path, 'w', encoding='UTF-8') as file:
+        print(data)
         file.write(data)
 
 
@@ -34,6 +35,7 @@ def get_nb():
 def add_note(new: dict[str, str]) -> str:
     global note_book
     new_id = int(note_book[-1].get('id')) + 1
+    print(new_id)
     new["id"] = str(new_id)
     note_book.append(new)
     return new.get('note')
@@ -61,15 +63,12 @@ def change_note(new: dict, index: int):
             return entry.get('note')
 
 # метод удаления заметки
-def delete_note(word: str) -> list[dict[str, str]]:
+def delete_note(key_del: int):
     global note_book
-    result: list[dict[str, str]] = []
-    for note in note_book:
-        for field in note.values():
-            if word.lower() in field.lower():
-                result.append(note)
-
-                break
+    result: list[dict[str, str]] = note_book
+    del_note = result[int(key_del)-1]
+    if del_note in result:
+        result = list.remove(result, del_note)
 
     return result
 

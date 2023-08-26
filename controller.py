@@ -49,9 +49,22 @@ def start():
                 key_word = view.input_search(text.delete_request)
                 result = model.search_note(key_word)
                 view.print_note(result, text.empty_search(key_word))
-                key_del = view.input_search(text.delete_note)
-                result = model.delete_note(key_del)
-                view.print_note(result, text.delete_successful(key_word))
+                dict = result[0]
+                list_result = list(dict.values())
+                index = list_result[0]
+                print(f'ID удаляемой строки = {index}')
+
+                if result:
+                        del_request = view.input_search(text.delete_note)
+                        if str.lower(del_request) == 'y':
+                           delit_note = model.delete_note(index)
+                           view.print_note(delit_note, text.delete_successful(key_word))
+                        else:
+                            print(f'Строка {result} не была удалена')
+                else:
+                    return result
+
+
 
             case 8:
                 break
